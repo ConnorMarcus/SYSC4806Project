@@ -19,8 +19,6 @@ public class Project {
 
     private String description;
 
-    private Date deadline;
-
     private int maxStudents;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -33,10 +31,10 @@ public class Project {
         this.students = new ArrayList<>();
     }
 
-    public Project(String title, String description, Date deadline) {
+    public Project(String title, String description, int maxStudents) {
         this.title= title;
         this.description = description;
-        this.deadline = deadline;
+        this.maxStudents = maxStudents;
         this.students = new ArrayList<>();
     }
 
@@ -83,21 +81,6 @@ public class Project {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * Get project deadline
-     */
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    /**
-     * Set project deadline
-     * @param deadline Date
-     */
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
     }
 
     /**
