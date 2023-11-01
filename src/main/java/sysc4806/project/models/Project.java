@@ -1,8 +1,10 @@
 package sysc4806.project.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -10,14 +12,37 @@ public class Project {
     @GeneratedValue
     private long id;
 
-    private String name;
+    private String title;
 
-    public String getName() {
-        return name;
+    private String description;
+
+    private Date deadline;
+
+    private int maxStudents;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Student> students;
+
+    @ManyToOne
+    private Professor professors;
+
+    public Project() {
+        this.students = new ArrayList<>();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Project(String title, String description, Date deadline) {
+        this.title= title;
+        this.description = description;
+        this.deadline = deadline;
+        this.students = new ArrayList<>();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public long getId() {
@@ -26,5 +51,45 @@ public class Project {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public Professor getProfessors() {
+        return professors;
+    }
+
+    public int getMaxStudents() {
+        return maxStudents;
+    }
+
+    public void setMaxStudents(int maxStudents) {
+        this.maxStudents = maxStudents;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
     }
 }
