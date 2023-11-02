@@ -7,11 +7,8 @@ import sysc4806.project.models.Project;
 
 @RestController
 public class SampleController {
-    @Autowired
-    private ProjectRepository repository;
     @GetMapping("/test")
     public String test() {
-        repository.save(new Project());
         return "test";
     }
 }
