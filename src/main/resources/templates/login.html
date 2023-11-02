@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Log In</title>
-    <link type="text/css" rel="stylesheet" th:href="@{/css/LoginStyles.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/LoginRegisterStyles.css}" />
 
     <style>
 
@@ -24,7 +24,7 @@
         <input type="password" name="password" placeholder="Password" required/>
     </div>
     <input type="submit" value="Log In"/>
+    <div class="redirect-link">Don't have an account? <a href="/register">Register Here</a></div>
 </form>
-<div><a href="/register">Register</a></div>
 </body>
 </html>
