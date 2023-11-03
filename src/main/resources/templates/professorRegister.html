@@ -5,7 +5,7 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/LoginRegisterStyles.css}" />
 </head>
 <body>
-<h1>Registration</h1>
+<h1>Professor Registration</h1>
 <form class="registration-form" th:action="@{/register/Professor}"  th:object="${professor}" method="post">
     <div class="error-message" th:if="${param.error}">
         A User with that email already exists!
