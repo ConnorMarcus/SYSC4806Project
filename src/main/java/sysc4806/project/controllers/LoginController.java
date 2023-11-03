@@ -16,6 +16,7 @@ import sysc4806.project.models.UserDetails;
 import sysc4806.project.repositories.ApplicationUserRepository;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
+import static sysc4806.project.util.AuthenticationHelper.*;
 
 @Controller
 public class LoginController {
@@ -27,22 +28,23 @@ public class LoginController {
 
     @GetMapping(path = "/login")
     public String login() {
+        if (isUserLoggedIn()) {
+            return "home";
+        }
         return "login";
     }
 
     @PostMapping(path = "/loginHandler")
-    public String logUserIn(HttpServletRequest req, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+    public String logUserIn(HttpServletRequest req,
+                            @RequestParam(name = "email") String email,
+                            @RequestParam(name = "password") String password) throws Exception {
         ApplicationUser user = userRepository.findApplicationUserByEmail(email);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            UserDetails userDetails = new UserDetails(
-                    user.getEmail(),
-                    user.getPassword(),
-                    SecurityContextHolder.getContext().getAuthentication().getAuthorities(),
-                    user.getId()
-            );
-
+            UserDetails userDetails = createUserDetails(user);
             SecurityContext sc = SecurityContextHolder.getContext();
-            sc.setAuthentication(new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities()));
+            sc.setAuthentication(
+                    new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities())
+            );
             HttpSession session = req.getSession(true);
             session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
             return "redirect:/home";

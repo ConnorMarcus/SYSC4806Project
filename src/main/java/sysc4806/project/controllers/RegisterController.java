@@ -11,6 +11,8 @@ import sysc4806.project.models.Professor;
 import sysc4806.project.models.Student;
 import sysc4806.project.repositories.ApplicationUserRepository;
 
+import static sysc4806.project.util.AuthenticationHelper.isUserLoggedIn;
+
 @Controller
 public class RegisterController {
     @Autowired
@@ -20,6 +22,10 @@ public class RegisterController {
 
     @GetMapping(path ="/register/Professor")
     public String registerProf(Model model) {
+        if (isUserLoggedIn()) {
+            return "home";
+        }
+
         Professor professor = new Professor();
         model.addAttribute("professor", professor);
         return "professorRegister";
@@ -27,6 +33,10 @@ public class RegisterController {
 
     @GetMapping(path ="/register/Student")
     public String registerStudent(Model model) {
+        if (isUserLoggedIn()) {
+            return "home";
+        }
+
         Student student = new Student();
         model.addAttribute("student", student);
         return "studentRegister";
@@ -39,7 +49,7 @@ public class RegisterController {
         }
         professor.setPassword(passwordEncoder.encode(professor.getPassword()));
         userRepository.save(professor);
-        return "login";
+        return "redirect:/login";
     }
 
     @PostMapping(path = "/register/Student")
@@ -49,6 +59,6 @@ public class RegisterController {
         }
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         userRepository.save(student);
-        return "login";
+        return "redirect:/login";
     }
 }
