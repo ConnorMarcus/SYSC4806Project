@@ -21,21 +21,22 @@ public class Project {
 
     private int maxStudents;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
     private List<Student> students;
 
     @ManyToOne
-    private Professor professors;
+    private Professor professor;
 
     public Project() {
         this.students = new ArrayList<>();
     }
 
-    public Project(String title, String description, int maxStudents) {
+    public Project(String title, String description, int maxStudents, Professor professor) {
         this.title= title;
         this.description = description;
         this.maxStudents = maxStudents;
         this.students = new ArrayList<>();
+        this.professor = professor;
     }
 
     /**
@@ -88,7 +89,7 @@ public class Project {
      * @return Professor
      */
     public Professor getProfessors() {
-        return professors;
+        return professor;
     }
 
     /**

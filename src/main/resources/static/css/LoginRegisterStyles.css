@@ -20,7 +20,9 @@ form {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"],
+select {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
@@ -51,5 +53,5 @@ button[type="submit"]:hover {
 
 .redirect-link {
     margin-top: 15px;
-    font-size: 15px;
+    font-size: 12px;
 }
