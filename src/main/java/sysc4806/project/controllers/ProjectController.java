@@ -32,6 +32,7 @@ public class ProjectController {
     @Secured(PROFESSOR_ROLE)
     public String showProjectForm(Model model) {
         Project project = new Project();
+        project.setMaxStudents(1);
         model.addAttribute("project", project);
         return "createProject";
     }

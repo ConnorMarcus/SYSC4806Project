@@ -21,6 +21,8 @@ public class Project {
 
     private int maxStudents;
 
+    private List<Program> restrictions;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
     private List<Student> students;
 
@@ -29,13 +31,14 @@ public class Project {
 
     public Project() {
         this.students = new ArrayList<>();
+        this.restrictions = new ArrayList<>();
     }
 
     public Project(String title, String description, int maxStudents, Professor professor) {
+        this();
         this.title= title;
         this.description = description;
         this.maxStudents = maxStudents;
-        this.students = new ArrayList<>();
         this.professor = professor;
     }
 
@@ -114,6 +117,23 @@ public class Project {
      */
     public void setMaxStudents(int maxStudents) {
         this.maxStudents = maxStudents;
+    }
+
+
+    /**
+     * Get program restrictions of the project
+     * @return List of eligible Programs for the project
+     */
+    public List<Program> getRestrictions() {
+        return restrictions;
+    }
+
+    /**
+     * Set a list of eligible programs for the project
+     * @param restrictions List of Programs that are eligible for the project
+     */
+    public void setRestrictions(List<Program> restrictions) {
+        this.restrictions = restrictions;
     }
 
     /**
