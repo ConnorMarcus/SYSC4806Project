@@ -85,11 +85,19 @@ public class Project {
     }
 
     /**
-     * Get project professor(s)
+     * Get project professor
      * @return Professor
      */
-    public Professor getProfessors() {
+    public Professor getProfessor() {
         return professor;
+    }
+
+    /**
+     * Set project professor
+     * @param professor Professor
+     */
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     /**
