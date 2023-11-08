@@ -23,7 +23,7 @@ public class Project {
 
     private List<Program> restrictions;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
     private List<Student> students;
 
     @ManyToOne
