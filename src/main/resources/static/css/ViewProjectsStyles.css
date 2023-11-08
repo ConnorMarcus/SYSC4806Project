@@ -41,11 +41,11 @@ button {
     cursor: pointer;
 }
 
-#delete {
+.delete {
     background-color: #ff0000;
 }
 
-#join, #leave, .create {
+.join, .leave, .create {
     background-color: #0056b3;
 }
 

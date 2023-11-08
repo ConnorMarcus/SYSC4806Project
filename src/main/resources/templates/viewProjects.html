@@ -40,17 +40,19 @@
             </td>
             <td th:attr="project-id=${project.getId()}">
                 <button
-                        id="delete"
+                        class="delete"
                         th:if="${isProfessor && userProjects.contains(project.getId())}">
                         Delete Project
                 </button>
                 <button
-                        id="join"
+                        class="join"
+                        th:attr="user-id=${userID}"
                         th:if="${!isProfessor && userProjects.isEmpty()}">
                         Join Project
                 </button>
                 <button
-                        id="leave"
+                        class="leave"
+                        th:attr="user-id=${userID}"
                         th:if="${!isProfessor && userProjects.contains(project.getId())}">
                         Leave Project
                 </button>
