@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 h1 {
@@ -54,4 +54,10 @@ button[type="submit"]:hover {
 .redirect-link {
     margin-top: 15px;
     font-size: 12px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
