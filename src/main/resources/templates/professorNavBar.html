@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333333;
+    }
+    li {
+        float: left;
+    }
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 16px;
+        text-decoration: none;
+    }
+    li a:hover {
+        background-color: #111111;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Navigation</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-inner">
+                <ul class="nav navbar-nav">
+                    <li><a href="/home">Create Project</a></li>
+                    <li><a href="/home">View Reports</a></li>
+                    <li><a href="javascript: document.logoutForm.submit()">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+        <input hidden type="submit" value="Sign Out"/>
+    </form>
+</body>
+</html>
