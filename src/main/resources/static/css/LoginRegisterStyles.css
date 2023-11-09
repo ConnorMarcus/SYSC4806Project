@@ -48,11 +48,13 @@ button[type="submit"]:hover {
 .error-message {
     color: #ff0000;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .redirect-link {
     margin-top: 15px;
     font-size: 12px;
+    text-align: center;
 }
 
 .center {
