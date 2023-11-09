@@ -2,17 +2,15 @@ package sysc4806.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sysc4806.project.models.*;
 import sysc4806.project.repositories.ApplicationUserRepository;
 import sysc4806.project.repositories.ProjectRepository;
-import java.util.ArrayList;
+import sysc4806.project.services.ApplicationUserService;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+
 
 import static sysc4806.project.util.AuthenticationHelper.*;
 
@@ -23,6 +21,9 @@ public class ProjectController {
 
     @Autowired
     private ApplicationUserRepository applicationUserRepository;
+
+    @Autowired
+    private ApplicationUserService applicationUserService;
 
     @GetMapping(path = "/createProject")
     @Secured(PROFESSOR_ROLE)
@@ -36,7 +37,7 @@ public class ProjectController {
     @PostMapping(path="/createProject")
     @Secured(PROFESSOR_ROLE)
     public String createProject(@ModelAttribute("project") Project project) {
-        Professor professor = (Professor) this.getCurrentUser();
+        Professor professor = (Professor) applicationUserService.getCurrentUser();
         project.setProfessor(professor);
         projectRepository.save(project);
         return "redirect:/viewProjects";
@@ -46,16 +47,24 @@ public class ProjectController {
     public String viewProjectsPage(Model model) throws Exception {
         List<Project> projects = (List<Project>) projectRepository.findAll();
         model.addAttribute("projects", projects);
-        model.addAttribute("isProfessor", isCurrentUserProfessor());
-        model.addAttribute("userProjects", getUserProjects());
+
+        boolean isProfessor = applicationUserService.isCurrentUserProfessor();
+        model.addAttribute("isProfessor", isProfessor);
+
+        if (isProfessor) {
+            Professor professor = (Professor) applicationUserService.getCurrentUser();
+            model.addAttribute("professorUser", professor);
+        } else {
+            Student student = (Student) applicationUserService.getCurrentUser();
+            model.addAttribute("studentUser", student);
+        }
         return "viewProjects";
     }
 
-    @DeleteMapping( "/deleteProject/{projectID}")
-    public String deleteProject(@PathVariable Long projectID) {
-        Optional<Project> projectWithID = projectRepository.findById(projectID);
-        if (projectWithID.isPresent()) {
-            Project project = projectWithID.get();
+    @DeleteMapping( "/deleteProject/{projectId}")
+    public String deleteProject(@PathVariable Long projectId) {
+        Project project = projectRepository.findById(projectId).orElse(null);
+        if (project != null) {
             disassociateProject(project);
             projectRepository.delete(project);
             return "viewProjects";
@@ -64,36 +73,43 @@ public class ProjectController {
         }
     }
 
+    @PatchMapping("/project/{projectId}/addStudent/{userId}")
+    public String addStudentToProject(@PathVariable Long projectId, @PathVariable Long userId) {
+        Project project = projectRepository.findById(projectId).orElse(null);
+        Student student = (Student) applicationUserRepository.findById(userId).orElse(null);
+        if (project != null && student != null) {
+            project.addStudent(student);
+            student.setProject(project);
+            projectRepository.save(project);
+            return "viewProjects";
+        }
+        return "error";
+    }
+
+    @PatchMapping("/project/{projectId}/removeStudent/{userId}")
+    public String removeStudentFromProject(@PathVariable Long projectId, @PathVariable Long userId) {
+        Project project = projectRepository.findById(projectId).orElse(null);
+        Student student = (Student) applicationUserRepository.findById(userId).orElse(null);
+        if (project != null && student != null) {
+            project.removeStudent(student);
+            student.setProject(null);
+            projectRepository.save(project);
+            return "viewProjects";
+        }
+        return "error";
+    }
+
+    /**
+     * Disassociates a project from students and professor
+     * @param project The project to disassociate
+     */
     private void disassociateProject(Project project) {
         for (Student s: project.getStudents()) {
             s.setProject(null);
+            applicationUserRepository.save(s);
         }
-        project.getProfessor().removeProject(project);
+        Professor professor = project.getProfessor();
+        professor.removeProject(project);
+        applicationUserRepository.save(professor);
     }
-
-    private ApplicationUser getCurrentUser() {
-        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return applicationUserRepository.findApplicationUserByEmail(user.getUsername());
-    }
-
-    private List<Long> getUserProjects() throws Exception {
-        List<Long> listOfProjectIDs = new ArrayList<>();
-        ApplicationUser currentUser = getCurrentUser();
-
-        if (!isCurrentUserProfessor()) {
-            listOfProjectIDs.add(((Student)currentUser).getProject().getId());
-        }
-        else {
-            for (Project project: ((Professor)currentUser).getProjects()) {
-                listOfProjectIDs.add(project.getId());
-            }
-        }
-        return listOfProjectIDs;
-    }
-
-    private boolean isCurrentUserProfessor() throws Exception {
-        ApplicationUser currentUser = getCurrentUser();
-        return Objects.equals(getUserRole(currentUser), PROFESSOR_ROLE);
-    }
-
 }

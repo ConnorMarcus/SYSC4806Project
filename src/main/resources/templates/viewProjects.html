@@ -41,19 +41,22 @@
             <td th:attr="project-id=${project.getId()}">
                 <button
                         class="delete"
-                        th:if="${isProfessor && userProjects.contains(project.getId())}">
+                        th:if="${isProfessor && professorUser.getProjects().contains(project)}">
                         Delete Project
                 </button>
                 <button
                         class="join"
-                        th:attr="user-id=${userID}"
-                        th:if="${!isProfessor && userProjects.isEmpty()}">
+                        th:attr="user-id=${studentUser.getId()}"
+                        th:if="${!isProfessor
+                                    && studentUser.project == null
+                                    && project.getStudents().size() < project.getMaxStudents()
+                                    && project.getRestrictions().contains(studentUser.getProgram())}">
                         Join Project
                 </button>
                 <button
                         class="leave"
-                        th:attr="user-id=${userID}"
-                        th:if="${!isProfessor && userProjects.contains(project.getId())}">
+                        th:attr="user-id=${studentUser.getId()}"
+                        th:if="${!isProfessor && studentUser.getProject()?.getId() == project.getId()}">
                         Leave Project
                 </button>
             </td>

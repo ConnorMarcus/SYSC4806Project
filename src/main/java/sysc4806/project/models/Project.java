@@ -1,9 +1,7 @@
 package sysc4806.project.models;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +21,7 @@ public class Project {
 
     private List<Program> restrictions;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "project")
     private List<Student> students;
 
     @ManyToOne
@@ -149,7 +147,9 @@ public class Project {
      * @param student Student to be added to the project
      */
     public void addStudent(Student student) {
-        students.add(student);
+        if (students.size() < maxStudents) {
+            students.add(student);
+        }
     }
 
     /**
