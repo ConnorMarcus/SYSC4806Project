@@ -15,6 +15,8 @@ We have designed a 4th Year Project Management System for Engineering students. 
      - [Agile Practices](#agile-practices)
 - [Tests](#tests)
 - [Diagrams](#diagrams)
+     - [Database Schema](#database-schema)
+     - [UML Diagram](#uml-class-diagram)
 - [Contributors](#contributors)
 
 ## Usage 
