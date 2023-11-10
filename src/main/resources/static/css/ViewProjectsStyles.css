@@ -1,39 +1,42 @@
 body {
-    font-family: Arial, sans-serif;
     background-color: #f5f5f5;
+}
+
+div.main-content {
+    font-family: Arial, sans-serif;
     text-align: center;
     margin-top: 50px;
     color: #333;
 }
 
-h1 {
+div.main-content h1 {
     margin-bottom: 30px;
 }
 
-table {
+div.main-content table {
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
     color: #333;
 }
 
-th, td {
+div.main-content th, div.main-content td {
     border: 2px solid #dddddd;
     padding: 8px;
     background-color: #fff;
 }
 
-ul {
+div.main-content ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-li {
+div.main-content li {
     margin: 5px 0;
 }
 
-button {
+div.main-content button {
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -54,6 +57,6 @@ button {
     margin-top: 30px;
 }
 
-button:hover {
+div.main-content button:hover {
     opacity: 70%;
 }

@@ -2,6 +2,7 @@ package sysc4806.project.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +17,13 @@ public class Professor extends ApplicationUser {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "professor")
     private List<Project> projects;
 
-    public Professor() {}
+    public Professor() {
+        this.projects = new ArrayList<>();
+    }
 
     public Professor(String name, String email, String password) {
         super(name, email, password);
+        this.projects = new ArrayList<>();
     }
 
     /**
