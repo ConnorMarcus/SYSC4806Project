@@ -52,13 +52,13 @@ Tickets for new features, bug fixes, and more are available in the [Issues tab](
   mvn clean test
   ```
 2. Run an individual test:
-   ```
-   mvn clean test -Dtest=<PATH_TO_TEST>.<TEST_CLASS>
-   ```
-   E.g., [TestStudent](/src/test/java/sysc4806.project/models/TestStudent.java)
-   ```
-   mvn clean test -Dtest=sysc4806.project.models.TestStudent
-   ```
+```
+mvn clean test -Dtest=<PATH_TO_TEST>.<TEST_CLASS>
+```
+E.g., [TestStudent](/src/test/java/sysc4806.project/models/TestStudent.java)
+```
+mvn clean test -Dtest=sysc4806.project.models.TestStudent
+```
 
 ## UML Diagrams
 UML Diagrams for the Models can be found in the [diagrams](/diagrams/uml) folder.
