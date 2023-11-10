@@ -17,12 +17,15 @@ public class HomePageController {
 
     @Autowired
     private ApplicationUserRepository userRepository;
-    @GetMapping(path = "/home")
-    public String getHomePage(Model model) throws Exception {       // Add to error page
-        UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    @GetMapping(path = {"/home", "/"})
+    public String getHomePage(Model model) throws Exception {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<ApplicationUser> user = userRepository.findById(userDetails.getUserId());
-        String role = AuthenticationHelper.getUserRole(user.get());
-        model.addAttribute("userType", role);
-        return "home";
+        if (user.isPresent()) {
+            String role = AuthenticationHelper.getUserRole(user.get());
+            model.addAttribute("userType", role);
+            return "home";
+        }
+        return "error";
     }
 }

@@ -5,8 +5,10 @@
     <title>4th year project website</title>
 </head>
 <body>
-    <div th:if="${userType=='ROLE_STUDENT'}" th:insert="~{studentNavBar}"></div>
-    <div th:if="${userType=='ROLE_PROFESSOR'}" th:insert="~{professorNavBar}"></div>
-    <h1>Welcome, to the 4th year project website!</h1>
+    <div th:if="${userType=='ROLE_STUDENT'}" th:insert="~{studentNavBar}" class="nav-bar"></div>
+    <div th:if="${userType=='ROLE_PROFESSOR'}" th:insert="~{professorNavBar}" class="nav-bar"></div>
+    <div class="main-content">
+        <h1>Welcome, to the 4th year project website!</h1>
+    </div>
 </body>
 </html>
