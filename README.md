@@ -6,6 +6,17 @@ SYSC 4806 Group Project
 ## About
 We have designed a 4th Year Project Management System for Engineering students. Our service allows students to create an account and join any available 4th year engineering project. Professors can create 4th year projects for students and can help manage them. 
 
+## Table of Contents
+- [About](#about)
+- [Usage](#usage)
+     - [Production](#production)
+     - [Local](#local)
+- [Sprints](#sprints)
+     - [Agile Practices](#agile-practices)
+- [Tests](#tests)
+- [UML Diagrams](/diagrams/uml)
+- [Contributors](#contributors)
+
 ## Usage 
 ### Production 
 The 4th Year Project Management System is available at [sysc4806project.azurewebsites.net](https://sysc4806project.azurewebsites.net/)
@@ -15,11 +26,16 @@ The 4th Year Project Management System is available at [sysc4806project.azureweb
    ```
    git clone https://github.com/ConnorMarcus/SYSC4806Project.git
    ```
-2. Navigate to Main
+2. Package the app
    ```
-   cd SYSC4806Project/src/main/java/sysc4806/project/
+   mvn package
    ```
-3. Open your browser and access the app @ [localhost:8080](https://localhost:8080)
+3. Execute the jar file
+   ```
+   cd target
+   java -jar SYSC4806Project-1.0-SNAPSHOT.jar
+   ```
+4. Open your browser and navigate to [localhost:8080](https://localhost:8080)
 
 ## Sprints
 Our project is divided into three 2-week sprints: 
