@@ -64,7 +64,7 @@ mvn clean test -Dtest=sysc4806.project.models.TestStudent
 
 ## Diagrams
 ### Database Schema
-Place holder
+The Database Schema diagram can be found in the [diagrams](/diagrams/db_schema_diagram.jpg) folder.
 
 ### UML Class Diagram
 The UML class diagram for all the Models can be found in the [diagrams](/diagrams/uml_class_diagram.jpg) folder.
