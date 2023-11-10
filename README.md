@@ -14,7 +14,7 @@ We have designed a 4th Year Project Management System for Engineering students. 
 - [Sprints](#sprints)
      - [Agile Practices](#agile-practices)
 - [Tests](#tests)
-- [UML Diagrams](/diagrams/uml)
+- [Diagrams](#diagrams)
 - [Contributors](#contributors)
 
 ## Usage 
@@ -60,8 +60,10 @@ E.g., [TestStudent](/src/test/java/sysc4806.project/models/TestStudent.java)
 mvn clean test -Dtest=sysc4806.project.models.TestStudent
 ```
 
-## UML Diagrams
-UML Diagrams for the Models can be found in the [diagrams](/diagrams/uml) folder.
+## Diagrams
+
+### UML Class Diagram
+The UML class diagram for all the Models can be found in the [diagrams](/diagrams/uml_class_diagram.jpg) folder.
    
 ## Contributors
 Connor Marcus, Noah Hammoud, George Pantazopoulos, and Vahid Foroughi
