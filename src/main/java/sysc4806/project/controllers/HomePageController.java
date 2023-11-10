@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import sysc4806.project.models.ApplicationUser;
 import sysc4806.project.models.UserDetails;
 import sysc4806.project.repositories.ApplicationUserRepository;
+import sysc4806.project.services.ApplicationUserService;
 import sysc4806.project.util.AuthenticationHelper;
 
 import java.util.Optional;
@@ -17,12 +18,14 @@ public class HomePageController {
 
     @Autowired
     private ApplicationUserRepository userRepository;
+    @Autowired
+    private ApplicationUserService userService;
+
     @GetMapping(path = {"/home", "/"})
     public String getHomePage(Model model) throws Exception {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<ApplicationUser> user = userRepository.findById(userDetails.getUserId());
-        if (user.isPresent()) {
-            String role = AuthenticationHelper.getUserRole(user.get());
+        ApplicationUser user = userService.getCurrentUser();
+        if (user != null) {
+            String role = AuthenticationHelper.getUserRole(user);
             model.addAttribute("userType", role);
             return "home";
         }

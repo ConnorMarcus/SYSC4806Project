@@ -40,7 +40,7 @@ public class TestHomePageController {
     public void testStudentHomePage() throws Exception {
         this.mockMvc.perform(get("/home")).andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("error"));
-        when(userRepository.findById(anyLong())).thenReturn(Optional.of(WithMockCustomStudentUser.STUDENT));
+        when(userRepository.findApplicationUserByEmail(anyString())).thenReturn(WithMockCustomStudentUser.STUDENT);
         this.mockMvc.perform(get("/home")).andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("home"))
                 .andExpect(model().attribute("userType", STUDENT_ROLE));
@@ -54,7 +54,7 @@ public class TestHomePageController {
     public void testProfessorHomePage() throws Exception {
         this.mockMvc.perform(get("/home")).andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("error"));
-        when(userRepository.findById(anyLong())).thenReturn(Optional.of(WithMockCustomProfessorUser.PROFESSOR));
+        when(userRepository.findApplicationUserByEmail(anyString())).thenReturn(WithMockCustomProfessorUser.PROFESSOR);
         this.mockMvc.perform(get("/home")).andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("home"))
                 .andExpect(model().attribute("userType", PROFESSOR_ROLE));
