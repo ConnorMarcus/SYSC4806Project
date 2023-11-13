@@ -5,4 +5,5 @@ import sysc4806.project.models.ApplicationUser;
 
 public interface ApplicationUserRepository extends CrudRepository<ApplicationUser, Long> {
     public ApplicationUser findApplicationUserByEmail(String email);
+    public boolean existsApplicationUserByEmail(String email);
 }

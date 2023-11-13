@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link type="text/css" rel="stylesheet" th:href="@{/css/LoginRegisterStyles.css}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="module">
+    import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js';
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDYllPZbchq6kb-kjo2G4huHyoOj3MhmSc",
+      authDomain: "sysc4806-project.firebaseapp.com",
+      databaseURL: "https://sysc4806-project-default-rtdb.firebaseio.com",
+      projectId: "sysc4806-project",
+      storageBucket: "sysc4806-project.appspot.com",
+      messagingSenderId: "186431862099",
+      appId: "1:186431862099:web:41079fa8cd63d84888dda6",
+      measurementId: "G-40HSCJJQWS"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    async function signInAndGetIdToken() {
+      const email = $("#email-input").val();
+      const password = $("#password-input").val();
+
+      try {
+        // Sign in user with email and password
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+        // Get the user's ID token
+        const idToken = await userCredential.user.getIdToken();
+        const idTokenResult = await userCredential.user.getIdTokenResult()
+        const userRole = idTokenResult.claims['userRole']
+
+        // Now you can send this ID token to your server
+        // Include it in the Authorization header of your HTTP requests, for example
+        $("#token-input").val(idToken);
+        $("#role-input").val(userRole);
+        $("#login-form").submit();
+
+      } catch (error) {
+        console.error('Error signing in:', error.message);
+        $("#login-form")
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .prop('checked', false)
+                .prop('selected', false);
+        window.location.href = window.location.href + "?error";
+      }
+    }
+    window.signInAndGetIdToken = signInAndGetIdToken;
+  </script>
+</head>
+
+<body>
+<h1>Login Form</h1>
+<form id="login-form" action="#" th:action="@{/firebaseLogin}" method="post">
+  <div class="error-message" th:if="${param.error}">
+    Invalid username and password.
+  </div>
+  <div th:if="${param.logout}">
+    You have been logged out.
+  </div>
+  <div>
+    <input type="text" id="email-input" name="email" placeholder="Email" required/>
+  </div>
+  <div>
+    <input type="password" id="password-input" name="password" placeholder="Password" required/>
+  </div>
+  <div class="center">
+    <input type="hidden" id="token-input" name="token">
+    <input type="hidden" id="role-input" name="role">
+    <input type="button" onclick="signInAndGetIdToken()" id="login-button" value="Log In"/>
+  </div>
+  <div class="redirect-link">Don't have an account? Register as a <a href="/signup/Student">student</a> or <a href="/signup/Professor">professor</a></div>
+</form>
+
+</body>
+</html>

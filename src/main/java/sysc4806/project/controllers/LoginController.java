@@ -31,7 +31,7 @@ public class LoginController {
         if (isUserLoggedIn()) {
             return "home";
         }
-        return "login";
+        return "firebaseLogin";
     }
 
     @PostMapping(path = "/loginHandler")

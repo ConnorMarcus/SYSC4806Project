@@ -19,7 +19,7 @@ public class Configuration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers("/register/**", "/loginHandler").permitAll()
+                                .requestMatchers("/register/**", "/signup/**", "/loginHandler", "/firebaseLogin").permitAll()
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                                 .permitAll()
                                 .anyRequest()
