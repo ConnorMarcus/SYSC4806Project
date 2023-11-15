@@ -9,6 +9,7 @@ import sysc4806.project.WithMockStudent;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static sysc4806.project.util.AuthenticationHelper.STUDENT_ROLE;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -19,9 +20,11 @@ public class TestRegisterController {
     @Test
     @WithMockStudent
     public void testRegisterLoggedIn() throws Exception {
-        this.mockMvc.perform(get("/register/Student")).andExpect(status().is2xxSuccessful())
+        this.mockMvc.perform(get("/register/Student").flashAttr("userType", STUDENT_ROLE))
+                .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("home"));
-        this.mockMvc.perform(get("/register/Professor")).andExpect(status().is2xxSuccessful())
+        this.mockMvc.perform(get("/register/Professor").flashAttr("userType", STUDENT_ROLE))
+                .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("home"));
     }
 
