@@ -32,7 +32,7 @@
                 <td th:text="${project.getDescription()}"></td>
                 <td>
                     <ul th:each="program : ${project.getRestrictions()}">
-                        <li th:text="${program}"></li>
+                        <li th:text="${program.getDisplayName()}"></li>
                     </ul>
                 </td>
                 <td th:text="${project.getProfessor().getName()}"></td>
