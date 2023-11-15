@@ -100,7 +100,7 @@ public class FirebaseAuthController {
     public String logUserIn(HttpServletRequest req,
                             @RequestParam(name = "token") String token,
                             @RequestParam(name = "role") String role) throws Exception {
-
+        
         FirebaseToken decodedToken;
         try {
             decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
@@ -132,11 +132,7 @@ public class FirebaseAuthController {
     private void saveApplicationUser(String uid) {
         ApplicationUser user = createUserFromFirebaseUID(uid);
         if (user != null) {
-            System.out.println("Email: " + user.getEmail());
             userRepository.save(user);
-        }
-        else {
-            System.out.println("HERE");
         }
     }
 }
