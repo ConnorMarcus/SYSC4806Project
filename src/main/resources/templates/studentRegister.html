@@ -22,7 +22,7 @@
         <label for="program">Program:</label>
         <select id="program" required th:field="*{program}">
             <option th:each="program : ${T(sysc4806.project.models.Program).values()}"
-                    th:value="${program}" th:text="${program.getDisplayName()}"></option>
+                    th:value="${program}" th:text="${program}"></option>
         </select>
     </div>
     <div>
