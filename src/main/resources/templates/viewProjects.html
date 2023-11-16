@@ -66,6 +66,7 @@
                 </td>
             </tr>
         </table>
+        <p th:unless="${projects != null && !projects.isEmpty()}">No current 4th year projects</p>
         <a th:if="${isProfessor}" href="/createProject"><button class="create">Create New Project</button></a>
     </div>
 
