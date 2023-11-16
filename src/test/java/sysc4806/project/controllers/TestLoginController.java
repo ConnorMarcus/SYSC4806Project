@@ -1,10 +1,7 @@
 package sysc4806.project.controllers;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,12 +14,12 @@ import sysc4806.project.models.ApplicationUser;
 import sysc4806.project.models.Professor;
 import sysc4806.project.repositories.ApplicationUserRepository;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static sysc4806.project.util.AuthenticationHelper.STUDENT_ROLE;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -40,7 +37,8 @@ public class TestLoginController {
     @Test
     @WithMockStudent
     public void testUserLoggedIn() throws Exception {
-        this.mockMvc.perform(get("/login")).andExpect(status().is2xxSuccessful())
+        this.mockMvc.perform(get("/login").flashAttr("userType", STUDENT_ROLE))
+                .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("home"));
     }
 
