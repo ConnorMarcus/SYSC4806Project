@@ -17,7 +17,7 @@ import static sysc4806.project.util.AuthenticationHelper.isUserLoggedIn;
 
 @Controller
 public class RegisterController {
-    private final Logger log = LoggerFactory.getLogger(HomePageController.class);
+    private final Logger log = LoggerFactory.getLogger(RegisterController.class);
 
     @Autowired
     private ApplicationUserRepository userRepository;

@@ -18,7 +18,7 @@ import static sysc4806.project.util.AuthenticationHelper.*;
 
 @Controller
 public class ProjectController {
-    private final Logger log = LoggerFactory.getLogger(HomePageController.class);
+    private final Logger log = LoggerFactory.getLogger(ProjectController.class);
 
     @Autowired
     private ProjectRepository projectRepository;
