@@ -1,5 +1,7 @@
 package sysc4806.project.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ import static sysc4806.project.util.AuthenticationHelper.*;
 
 @Controller
 public class ProjectController {
+    private final Logger log = LoggerFactory.getLogger(ProjectController.class);
+
     @Autowired
     private ProjectRepository projectRepository;
 
@@ -37,9 +41,11 @@ public class ProjectController {
     @PostMapping(path="/createProject")
     @Secured(PROFESSOR_ROLE)
     public String createProject(@ModelAttribute("project") Project project) {
+        log.info("CREATE project request received");
         Professor professor = (Professor) applicationUserService.getCurrentUser();
         project.setProfessor(professor);
         projectRepository.save(project);
+        log.info(String.format("Project with id: %s, successfully created", project.getId()));
         return "redirect:/viewProjects";
     }
 
@@ -63,39 +69,48 @@ public class ProjectController {
 
     @DeleteMapping( "/deleteProject/{projectId}")
     public String deleteProject(@PathVariable Long projectId) {
+        log.info(String.format("DELETE project request received for id: %s", projectId));
         Project project = projectRepository.findById(projectId).orElse(null);
         if (project != null) {
             disassociateProject(project);
             projectRepository.delete(project);
+            log.info(String.format("project with id: %s, successfully DELETED", projectId));
             return "viewProjects";
         } else {
+            log.error(String.format("FAILED to DELETE project with id: %s", projectId));
             return "error";
         }
     }
 
     @PatchMapping("/project/{projectId}/addStudent/{userId}")
     public String addStudentToProject(@PathVariable Long projectId, @PathVariable Long userId) {
+        log.info("add student to project PATCH request received");
         Project project = projectRepository.findById(projectId).orElse(null);
         Student student = (Student) applicationUserRepository.findById(userId).orElse(null);
         if (project != null && student != null) {
             project.addStudent(student);
             student.setProject(project);
+            log.info(String.format("student with id: %s has been added to project with id: %s", userId, projectId));
             projectRepository.save(project);
             return "viewProjects";
         }
+        log.error("FAILED to add student to project");
         return "error";
     }
 
     @PatchMapping("/project/{projectId}/removeStudent/{userId}")
     public String removeStudentFromProject(@PathVariable Long projectId, @PathVariable Long userId) {
+        log.info("remove student from project PATCH request received");
         Project project = projectRepository.findById(projectId).orElse(null);
         Student student = (Student) applicationUserRepository.findById(userId).orElse(null);
         if (project != null && student != null) {
             project.removeStudent(student);
             student.setProject(null);
             projectRepository.save(project);
+            log.info(String.format("student with id: %s has been removed from project with id: %s", userId, projectId));
             return "viewProjects";
         }
+        log.error("FAILED to remove student from project");
         return "error";
     }
 

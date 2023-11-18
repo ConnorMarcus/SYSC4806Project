@@ -1,5 +1,7 @@
 package sysc4806.project.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,11 @@ import static sysc4806.project.util.AuthenticationHelper.isUserLoggedIn;
 
 @Controller
 public class RegisterController {
+    private final Logger log = LoggerFactory.getLogger(RegisterController.class);
+
     @Autowired
     private ApplicationUserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -49,6 +54,7 @@ public class RegisterController {
         }
         professor.setPassword(passwordEncoder.encode(professor.getPassword()));
         userRepository.save(professor);
+        log.info("Professor has successfully registered");
         return "redirect:/login";
     }
 
@@ -59,6 +65,7 @@ public class RegisterController {
         }
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         userRepository.save(student);
+        log.info("Student has successfully registered");
         return "redirect:/login";
     }
 }

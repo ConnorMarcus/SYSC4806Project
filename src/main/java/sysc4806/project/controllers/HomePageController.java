@@ -1,5 +1,7 @@
 package sysc4806.project.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import sysc4806.project.util.AuthenticationHelper;
 
 @Controller
 public class HomePageController {
+    private final Logger log= LoggerFactory.getLogger(HomePageController.class);
 
     @Autowired
     private ApplicationUserService userService;
@@ -23,6 +26,7 @@ public class HomePageController {
             model.addAttribute("userName", user.getName());
             return "home";
         }
+        log.error("Failed to go to homepage");
         return "error";
     }
 }
