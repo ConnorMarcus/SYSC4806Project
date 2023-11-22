@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Report</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/StudentReportUploadStyles.css}" />
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h3>Upload Report File</h3>
+            <div class="drop_box">
+                <header>
+                    <h4>Select File here</h4>
+                </header>
+                <p>Files Supported: PDF, TEXT, DOC, DOCX</p>
+                <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" class="file-input form" />
+                <label for="fileID" class="btn">Choose File</label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

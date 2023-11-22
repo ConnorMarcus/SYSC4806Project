@@ -114,6 +114,11 @@ public class ProjectController {
         return "error";
     }
 
+    @GetMapping("/studentReportUpload")
+    public String uploadReport() {
+        return "studentReportUpload";
+    }
+
     /**
      * Disassociates a project from students and professor
      * @param project The project to disassociate
