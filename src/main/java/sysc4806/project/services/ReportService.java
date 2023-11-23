@@ -16,8 +16,10 @@ import java.io.InputStream;
 public class ReportService {
     @Autowired
     private ProjectRepository projectRepository;
+
     @Autowired
     private ReportFileRepository reportFileRepository;
+
     private final Logger log = LoggerFactory.getLogger(ReportService.class);
 
     public void saveReport(Project project, MultipartFile file) throws Exception {

@@ -9,7 +9,7 @@
     <div th:insert="~{studentNavBar}" class="nav-bar"></div>
     <div class="main-content">
         <div th:if="${uploadError}" th:text="${uploadError}"></div>
-        <form th:if="${inProject}" class="container" method="POST" enctype="multipart/form-data" action="#" th:action="@{/studentReportUpload}">
+        <form th:if="${inProject && beforeDeadline}" class="container" method="POST" enctype="multipart/form-data" action="#" th:action="@{/studentReportUpload}">
             <div class="card">
                 <h3>Upload Report File</h3>
                 <div class="drop_box">
@@ -22,8 +22,9 @@
                 </div>
             </div>
         </form>
+        <p class="deadline-message" th:if="${inProject && beforeDeadline}" th:text="'Submission Deadline: ' + ${deadline}"></p>
         <div th:if="${inProject}"><span>Submitted Report: </span><a th:text="${reportName}" href="/downloadReport"></a></div>
-        <div th:if="${!inProject}">You must join a project before submitting a report!</div>
+        <p class="not-in-project" th:if="${!inProject}">You must join a project before submitting a report!</p>
     </div>
 </body>
 </html>

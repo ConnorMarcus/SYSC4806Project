@@ -83,6 +83,7 @@ public class TestProjectController {
     }
 
     @Test
+    @WithMockProfessor
     public void testDeleteProject() throws Exception {
         this.mockMvc.perform(delete("/deleteProject/"+100)
                 .with(csrf()))
@@ -101,6 +102,7 @@ public class TestProjectController {
     }
 
     @Test
+    @WithMockStudent
     public void testAddStudentToProject() throws Exception {
         this.mockMvc.perform(patch("/project/{projectId}/addStudent/{studentId}", 100, 25)
                 .with(csrf()))

@@ -67,12 +67,16 @@ public class ReportFile {
 
     /**
      * Sets the id
-     * @param id
+     * @param id Long id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Gets the id
+     * @return Long the id
+     */
     public Long getId() {
         return id;
     }

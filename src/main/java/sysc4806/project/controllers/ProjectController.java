@@ -13,7 +13,6 @@ import sysc4806.project.repositories.ProjectRepository;
 import sysc4806.project.services.ApplicationUserService;
 import java.util.List;
 
-
 import static sysc4806.project.util.AuthenticationHelper.*;
 
 @Controller
