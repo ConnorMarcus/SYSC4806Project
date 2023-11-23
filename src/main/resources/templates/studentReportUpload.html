@@ -6,18 +6,24 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/StudentReportUploadStyles.css}" />
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h3>Upload Report File</h3>
-            <div class="drop_box">
-                <header>
-                    <h4>Select File here</h4>
-                </header>
-                <p>Files Supported: PDF, TEXT, DOC, DOCX</p>
-                <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" class="file-input form" />
-                <label for="fileID" class="btn">Choose File</label>
+    <div th:insert="~{studentNavBar}" class="nav-bar"></div>
+    <div class="main-content">
+        <div th:if="${uploadError}" th:text="${uploadError}"></div>
+        <form th:if="${inProject}" class="container" method="POST" enctype="multipart/form-data" action="#" th:action="@{/studentReportUpload}">
+            <div class="card">
+                <h3>Upload Report File</h3>
+                <div class="drop_box">
+                    <header>
+                        <h4>Select File here</h4>
+                    </header>
+                    <p>Files Supported: PDF</p>
+                    <input name="file" type="file" accept=".pdf" id="fileID" class="btn" />
+                    <button class="btn submit-button" type="submit">Submit</button>
+                </div>
             </div>
-        </div>
+        </form>
+        <div th:if="${inProject}"><span>Submitted Report: </span><a th:text="${reportName}" href="/downloadReport"></a></div>
+        <div th:if="${!inProject}">You must join a project before submitting a report!</div>
     </div>
 </body>
 </html>
