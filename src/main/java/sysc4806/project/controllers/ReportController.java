@@ -51,7 +51,7 @@ public class ReportController {
     public String uploadReport(@RequestParam("file") MultipartFile file, Model model) throws Exception {
         Student user = (Student) userService.getCurrentUser();
         if (user.getProject() != null) {
-            model.addAttribute("deadline", Project.getDeadline());
+            model.addAttribute("deadline", Project.getDeadline().getTime().toString());
             boolean beforeDeadline = isBeforeDeadline();
             if (beforeDeadline) {
                 try {
