@@ -1,8 +1,8 @@
 package sysc4806.project.models;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 /**
  * Project model
@@ -26,6 +26,11 @@ public class Project {
 
     @ManyToOne
     private Professor professor;
+
+    @OneToOne
+    private ReportFile report;
+
+    private static Calendar deadline = new GregorianCalendar(2023, Calendar.DECEMBER, 8);
 
     public Project() {
         this.students = new ArrayList<>();
@@ -158,5 +163,38 @@ public class Project {
      */
     public void removeStudent(Student student) {
         students.remove(student);
+    }
+
+
+    /**
+     * Getter for the report
+     * @return byte array representing the report
+     */
+    public ReportFile getReport() {
+        return report;
+    }
+
+    /**
+     * Setter for the report
+     * @param report the report thats being set
+     */
+    public void setReport(ReportFile report) {
+        this.report = report;
+    }
+
+    /**
+     * Setter for the deadline
+     * @return The deadline of the project
+     */
+    public static Calendar getDeadline() {
+        return deadline;
+    }
+
+    /**
+     * Getter for the deadline
+     * @param deadline The deadline of the project
+     */
+    public static void setDeadline(Calendar deadline) {
+        Project.deadline = deadline;
     }
 }

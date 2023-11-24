@@ -3,9 +3,7 @@ package sysc4806.project.models;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -107,5 +105,19 @@ class TestProject {
         project.addStudent(s);
         project.removeStudent(s);
         assertEquals(new ArrayList<>(), project.getStudents());
+    }
+
+    @Test
+    void testSetReportFile() {
+        ReportFile file = new ReportFile();
+        project.setReport(file);
+        assertEquals(file, project.getReport());
+    }
+
+    @Test
+    void testSetDeadline() {
+        Calendar calendar = new GregorianCalendar(2023, Calendar.DECEMBER, 12);
+        project.setDeadline(calendar);
+        assertEquals(calendar, project.getDeadline());
     }
 }

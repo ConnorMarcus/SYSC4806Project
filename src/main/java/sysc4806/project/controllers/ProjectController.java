@@ -13,7 +13,6 @@ import sysc4806.project.repositories.ProjectRepository;
 import sysc4806.project.services.ApplicationUserService;
 import java.util.List;
 
-
 import static sysc4806.project.util.AuthenticationHelper.*;
 
 @Controller
@@ -67,7 +66,8 @@ public class ProjectController {
         return "viewProjects";
     }
 
-    @DeleteMapping( "/deleteProject/{projectId}")
+    @DeleteMapping(path = "/deleteProject/{projectId}")
+    @Secured(PROFESSOR_ROLE)
     public String deleteProject(@PathVariable Long projectId) {
         log.info(String.format("DELETE project request received for id: %s", projectId));
         Project project = projectRepository.findById(projectId).orElse(null);
@@ -82,7 +82,8 @@ public class ProjectController {
         }
     }
 
-    @PatchMapping("/project/{projectId}/addStudent/{userId}")
+    @PatchMapping(path = "/project/{projectId}/addStudent/{userId}")
+    @Secured(STUDENT_ROLE)
     public String addStudentToProject(@PathVariable Long projectId, @PathVariable Long userId) {
         log.info("add student to project PATCH request received");
         Project project = projectRepository.findById(projectId).orElse(null);
@@ -98,7 +99,8 @@ public class ProjectController {
         return "error";
     }
 
-    @PatchMapping("/project/{projectId}/removeStudent/{userId}")
+    @PatchMapping(path = "/project/{projectId}/removeStudent/{userId}")
+    @Secured(STUDENT_ROLE)
     public String removeStudentFromProject(@PathVariable Long projectId, @PathVariable Long userId) {
         log.info("remove student from project PATCH request received");
         Project project = projectRepository.findById(projectId).orElse(null);
