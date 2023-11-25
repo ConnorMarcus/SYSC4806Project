@@ -17,13 +17,15 @@
                         <h4>Select File here</h4>
                     </header>
                     <p>Files Supported: PDF</p>
-                    <input name="file" type="file" accept=".pdf" id="fileID" class="btn" />
-                    <button class="btn submit-button" type="submit">Submit</button>
+                    <input name="file" type="file" accept=".pdf" id="fileID" class="file-upload" />
+                </div>
+                <div class="center">
+                    <button class="submit-button" type="submit">Submit</button>
                 </div>
             </div>
         </form>
         <p class="deadline-message" th:if="${inProject && beforeDeadline}" th:text="'Submission Deadline: ' + ${deadline}"></p>
-        <div th:if="${inProject}"><span>Submitted Report: </span><a th:text="${reportName}" href="/downloadReport"></a></div>
+        <p th:if="${inProject}"><span>Submitted Report: </span><a th:text="${reportName}" href="/downloadReport"></a></p>
         <p class="not-in-project" th:if="${!inProject}">You must join a project before submitting a report!</p>
     </div>
 </body>

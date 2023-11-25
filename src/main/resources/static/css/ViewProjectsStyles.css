@@ -1,4 +1,6 @@
 body {
+    font-family: Arial, sans-serif;
+    margin: 0;
     background-color: #f5f5f5;
 }
 
@@ -48,8 +50,12 @@ div.main-content button {
     background-color: #ff0000;
 }
 
+.delete:hover {
+    background-color: #b60000;
+}
+
 .join, .leave, .create {
-    background-color: #0056b3;
+    background-color: #007bff;
 }
 
 .create {
@@ -57,6 +63,6 @@ div.main-content button {
     margin-top: 30px;
 }
 
-div.main-content button:hover {
-    opacity: 70%;
+.join:hover, .leave:hover, .create:hover {
+    background-color: #0056b3;
 }
