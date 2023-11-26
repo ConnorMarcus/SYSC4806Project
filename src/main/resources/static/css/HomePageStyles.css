@@ -1,9 +1,10 @@
 body {
+    font-family: Arial, sans-serif;
+    margin: 0;
     background-color: #f5f5f5;
 }
 
 div.main-content {
-    font-family: Arial, sans-serif;
     text-align: center;
     margin-top: 50px;
     color: #333;
