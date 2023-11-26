@@ -7,7 +7,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import sysc4806.project.WithMockCustomProfessorUser;
 import sysc4806.project.WithMockCustomStudentUser;
+import sysc4806.project.WithMockProfessor;
 import sysc4806.project.WithMockStudent;
 import sysc4806.project.models.Project;
 import sysc4806.project.models.ReportFile;
@@ -43,5 +45,22 @@ public class TestDownloadController {
         WithMockCustomStudentUser.STUDENT.setProject(project);
         this.mockMvc.perform(get("/downloadReport")).andExpect(status().isOk())
                 .andExpect(content().bytes(report.getFileData()));
+    }
+
+    @Test
+    @WithMockProfessor
+    public void testProfessorDownloadReport() throws Exception {
+        when(userService.getCurrentUser()).thenReturn(WithMockCustomProfessorUser.PROFESSOR);
+
+        this.mockMvc.perform(get("/downloadReport/200")).andExpect(status().isBadRequest());
+
+        // Test download when student is in a project
+        Project project = new Project();
+        ReportFile report = new ReportFile("filename", "content".getBytes());
+        project.setReport(report);
+        WithMockCustomProfessorUser.PROFESSOR.getProjects().add(project);
+        this.mockMvc.perform(get("/downloadReport/" + project.getId())).andExpect(status().isOk())
+                .andExpect(content().bytes(report.getFileData()));
+
     }
 }

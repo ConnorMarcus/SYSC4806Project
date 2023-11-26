@@ -8,7 +8,7 @@
 <body>
     <div th:insert="~{professorNavBar}" class="nav-bar"></div>
     <div class="main-content">
-        <h1>Set Deadlines:</h1>
+        <h1>Set Deadlines</h1>
         <form th:action="@{/deadlines/setReport}" method="post">
             <label for="datepicker">Choose a report deadline date:</label>
             <input type="date" id="datepicker" name="selectedDate" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required>
