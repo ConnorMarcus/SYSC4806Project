@@ -14,7 +14,7 @@
     <div th:unless="${isProfessor}" th:insert="~{studentNavBar}" class="nav-bar"></div>
 
     <div class="main-content">
-        <h1>List of 4th Year Projects:</h1>
+        <h1>List of 4th Year Projects</h1>
         <table th:if="${projects != null && !projects.isEmpty()}">
             <tr>
                 <th>ID</th>
