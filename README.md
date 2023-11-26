@@ -41,8 +41,8 @@ The 4th Year Project Management System is available at [sysc4806project.azureweb
 
 ## Sprints
 Our project is divided into three 2-week sprints: 
-- Early Prototype (**available now**)
-- Alpha Release (November 27, 2023)
+- Early Prototype (Released Nov 13, 2023)
+- Alpha Release (**available now**)
 - Final Product (December 8, 2023)
 
 ### Agile Practices
