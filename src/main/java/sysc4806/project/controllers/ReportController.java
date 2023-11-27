@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import sysc4806.project.models.Professor;
 import sysc4806.project.models.Project;
 import sysc4806.project.models.ReportFile;
 import sysc4806.project.models.Student;
@@ -18,6 +19,7 @@ import sysc4806.project.util.AuthenticationHelper;
 
 import java.util.Date;
 
+import static sysc4806.project.util.AuthenticationHelper.PROFESSOR_ROLE;
 import static sysc4806.project.util.AuthenticationHelper.STUDENT_ROLE;
 
 @Controller
@@ -27,6 +29,21 @@ public class ReportController {
 
     @Autowired
     private ApplicationUserService userService;
+
+    @GetMapping(path = "/viewReports")
+    @Secured(PROFESSOR_ROLE)
+    public String viewProjectReports(Model model) {
+        Professor user = (Professor) userService.getCurrentUser();
+        model.addAttribute("deadline", Project.getDeadline().getTime().toString());
+        if (!user.getProjects().isEmpty()) {
+            model.addAttribute("hasProjects", true);
+            model.addAttribute("projects", user.getProjects());
+        }
+        else {
+            model.addAttribute("hasProjects", false);
+        }
+        return "professorViewReports";
+    }
 
     @GetMapping(path = "/studentReportUpload")
     @Secured(STUDENT_ROLE)

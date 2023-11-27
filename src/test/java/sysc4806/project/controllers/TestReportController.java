@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import sysc4806.project.WithMockCustomProfessorUser;
 import sysc4806.project.WithMockCustomStudentUser;
+import sysc4806.project.WithMockProfessor;
 import sysc4806.project.WithMockStudent;
 import sysc4806.project.models.Project;
 import sysc4806.project.models.ReportFile;
@@ -89,6 +91,30 @@ public class TestReportController {
         this.mockMvc.perform(multipart("/studentReportUpload").file(file))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/home"));
+    }
+
+    @Test
+    @WithMockProfessor
+    public void testViewProjectReports() throws Exception {
+        when(userService.getCurrentUser()).thenReturn(WithMockCustomProfessorUser.PROFESSOR);
+        Project proj = new Project();
+        String reportFileName = "Test";
+        proj.setReport(new ReportFile(reportFileName, "test".getBytes()));
+        WithMockCustomProfessorUser.PROFESSOR.getProjects().add(proj);
+        this.mockMvc.perform(get("/viewReports"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("professorViewReports"))
+                .andExpect(model().attribute("deadline", Project.getDeadline().getTime().toString()))
+                .andExpect(model().attribute("hasProjects", true))
+                .andExpect(model().attribute("projects", WithMockCustomProfessorUser.PROFESSOR.getProjects()));
+
+        // Test when prof has no projects
+        WithMockCustomProfessorUser.PROFESSOR.getProjects().clear();
+        this.mockMvc.perform(get("/viewReports"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("professorViewReports"))
+                .andExpect(model().attribute("deadline", Project.getDeadline().getTime().toString()))
+                .andExpect(model().attribute("hasProjects", false));
     }
 
 
