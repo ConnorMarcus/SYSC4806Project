@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import sysc4806.project.models.ApplicationUser;
+import sysc4806.project.models.Student;
 import sysc4806.project.services.ApplicationUserService;
 import sysc4806.project.util.AuthenticationHelper;
 
@@ -24,6 +25,9 @@ public class HomePageController {
             String role = AuthenticationHelper.getUserRole(user);
             model.addAttribute("userType", role);
             model.addAttribute("userName", user.getName());
+            if (user instanceof Student) {
+                model.addAttribute("reminder", ((Student) user).getReminder());
+            }
             return "home";
         }
         log.error("Failed to go to homepage");

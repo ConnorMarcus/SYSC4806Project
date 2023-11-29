@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import sysc4806.project.models.*;
 import sysc4806.project.repositories.ApplicationUserRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

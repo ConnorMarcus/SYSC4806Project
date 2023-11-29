@@ -13,6 +13,10 @@
         <p>
             Your user type is: <span th:text="${userType.substring(5)}"></span>
         </p>
+        <div th:if="${userType=='ROLE_STUDENT' && reminder != null}">
+            <h3>Reminder</h3>
+            <p th:text="${reminder}"></p>
+        </div>
     </div>
 </body>
 </html>
