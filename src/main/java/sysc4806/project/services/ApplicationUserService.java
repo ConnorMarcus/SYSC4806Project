@@ -36,4 +36,18 @@ public class ApplicationUserService {
         ApplicationUser currentUser = getCurrentUser();
         return Objects.equals(getUserRole(currentUser), PROFESSOR_ROLE);
     }
+
+    /**
+     * Gets a list of students not in a group
+     * @return List<Students> Students not in a group
+     */
+    public List<Student> getStudentsNotInGroup() {
+        List<Student> students = new ArrayList<>();
+        for (ApplicationUser user: applicationUserRepository.findAll()) {
+            if (user instanceof Student && ((Student) user).getProject() == null) {
+                students.add((Student) user);
+            }
+        }
+        return students;
+    }
 }
