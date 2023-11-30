@@ -8,6 +8,10 @@ h1, h3 {
     text-align: center;
 }
 
+div.main-content {
+    margin-top: 50px;
+}
+
 div.main-content table {
     margin-left: auto;
     margin-right: auto;

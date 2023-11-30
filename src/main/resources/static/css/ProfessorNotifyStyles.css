@@ -27,3 +27,16 @@ div.main-content th, div.main-content td {
     padding: 8px;
     background-color: #fff;
 }
+
+div.main-content button {
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #007bff;
+}
+
+div.main-content button:hover {
+    background-color: #0056b3;
+}
