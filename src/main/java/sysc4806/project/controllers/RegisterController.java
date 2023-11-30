@@ -38,6 +38,9 @@ public class RegisterController {
             String role = AuthenticationHelper.getUserRole(user);
             model.addAttribute("userType", role);
             model.addAttribute("userName", user.getName());
+            if (user instanceof Student) {
+                model.addAttribute("reminder", ((Student) user).getReminder());
+            }
             return "home";
         }
 
@@ -53,7 +56,9 @@ public class RegisterController {
             String role = AuthenticationHelper.getUserRole(user);
             model.addAttribute("userType", role);
             model.addAttribute("userName", user.getName());
-            model.addAttribute("reminder", ((Student) user).getReminder());
+            if (user instanceof Student) {
+                model.addAttribute("reminder", ((Student) user).getReminder());
+            }
             return "home";
         }
 

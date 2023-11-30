@@ -55,6 +55,12 @@ public class TestRegisterController {
                 .andExpect(model().attribute("userName", name))
                 .andExpect(model().attribute("reminder", reminder))
                 .andExpect(view().name("home"));
+        this.mockMvc.perform(get("/register/Professor"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attribute("userType", STUDENT_ROLE))
+                .andExpect(model().attribute("userName", name))
+                .andExpect(model().attribute("reminder", reminder))
+                .andExpect(view().name("home"));
     }
 
 
