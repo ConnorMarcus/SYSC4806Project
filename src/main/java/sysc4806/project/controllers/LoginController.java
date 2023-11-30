@@ -8,12 +8,16 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sysc4806.project.models.ApplicationUser;
+import sysc4806.project.models.Student;
 import sysc4806.project.models.UserDetails;
 import sysc4806.project.repositories.ApplicationUserRepository;
+import sysc4806.project.services.ApplicationUserService;
+import sysc4806.project.util.AuthenticationHelper;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 import static sysc4806.project.util.AuthenticationHelper.*;
@@ -26,9 +30,19 @@ public class LoginController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ApplicationUserService userService;
+
     @GetMapping(path = "/login")
-    public String login() {
+    public String login(Model model) throws Exception {
         if (isUserLoggedIn()) {
+            ApplicationUser user = userService.getCurrentUser();
+            String role = AuthenticationHelper.getUserRole(user);
+            model.addAttribute("userType", role);
+            model.addAttribute("userName", user.getName());
+            if (user instanceof Student) {
+                model.addAttribute("reminder", ((Student) user).getReminder());
+            }
             return "home";
         }
         return "login";
