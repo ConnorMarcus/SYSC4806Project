@@ -4,12 +4,15 @@ body {
     background-color: #f5f5f5;
 }
 
-h1, h3 {
+div.main-content {
+    font-family: Arial, sans-serif;
     text-align: center;
+    margin-top: 50px;
+    color: #333;
 }
 
-div.main-content {
-    margin-top: 50px;
+div.main-content h1 {
+    margin-bottom: 30px;
 }
 
 div.main-content table {
@@ -19,18 +22,21 @@ div.main-content table {
     color: #333;
 }
 
-div.main-content h1 {
-    margin-bottom: 5px;
-}
-
 div.main-content th, div.main-content td {
     border: 2px solid #dddddd;
     padding: 8px;
     background-color: #fff;
 }
 
-.not-in-project {
-    margin-top: 50px;
-    font-size: 30px;
-    text-align: center;
+div.main-content button {
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #007bff;
+}
+
+div.main-content button:hover {
+    background-color: #0056b3;
 }

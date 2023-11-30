@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import sysc4806.project.models.*;
 import sysc4806.project.repositories.ApplicationUserRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -35,5 +34,19 @@ public class ApplicationUserService {
     public boolean isCurrentUserProfessor() throws Exception {
         ApplicationUser currentUser = getCurrentUser();
         return Objects.equals(getUserRole(currentUser), PROFESSOR_ROLE);
+    }
+
+    /**
+     * Gets a list of students not in a group
+     * @return List<Students> Students not in a group
+     */
+    public List<Student> getStudentsNotInGroup() {
+        List<Student> students = new ArrayList<>();
+        for (ApplicationUser user: applicationUserRepository.findAll()) {
+            if (user instanceof Student && ((Student) user).getProject() == null) {
+                students.add((Student) user);
+            }
+        }
+        return students;
     }
 }

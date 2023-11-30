@@ -9,6 +9,9 @@ import java.util.Date;
  */
 @Entity
 public class Student extends ApplicationUser {
+
+    private String reminder;
+
     private Program program;
 
     private Date oralPresentationAvailability;
@@ -22,6 +25,7 @@ public class Student extends ApplicationUser {
     public Student(String name, String email, String password, Program program) {
         super(name, email, password);
         this.program = program;
+        this.reminder = "";
     }
 
     /**
@@ -70,5 +74,21 @@ public class Student extends ApplicationUser {
      */
     public void setOralPresentationAvailability(Date oralPresentationAvailability) {
         this.oralPresentationAvailability = oralPresentationAvailability;
+    }
+
+    /**
+     * Get student's reminder
+     * @return String
+     */
+    public String getReminder() {
+        return reminder;
+    }
+
+    /**
+     * Set student's reminder
+     * @param reminder String
+     */
+    public void setReminder(String reminder) {
+        this.reminder = reminder;
     }
 }
