@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -36,11 +37,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TestProjectController {
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     @InjectMocks
     private ProjectController controller;
+
     @MockBean
     private ProjectRepository projectRepository;
+
     @MockBean
     private ApplicationUserRepository applicationUserRepository;
 
@@ -118,5 +122,27 @@ public class TestProjectController {
                         .with(csrf()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("viewProjects"));
+    }
+
+
+    @Test
+    @WithMockStudent
+    public void testAddStudentToProjectWithReminder() throws Exception {
+        this.mockMvc.perform(patch("/project/{projectId}/addStudent/{studentId}", 100, 25)
+                        .with(csrf()))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("error"));
+
+        Project project = new Project();
+        ApplicationUser user = new Student();
+        ((Student) user).setReminder("Please join a project");
+        doReturn(Optional.of(project)).when(projectRepository).findById(any());
+        doReturn(Optional.of(user)).when(applicationUserRepository).findById(any());
+        this.mockMvc.perform(patch("/project/{projectId}/addStudent/{studentId}",
+                        project.getId(), user.getId())
+                        .with(csrf()))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("viewProjects"));
+        assertNull(((Student) user).getReminder());
     }
 }

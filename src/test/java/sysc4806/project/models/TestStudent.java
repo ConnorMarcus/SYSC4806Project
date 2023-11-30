@@ -17,8 +17,7 @@ public class TestStudent {
 
     @Test
     public void testGetAndSetProject() {
-        Professor professor = new Professor();
-        Project project = new Project("Test Project", "Project for Testing", 10, professor);
+        Project project = new Project();
         student.setProject(project);
         assertEquals(student.getProject(), project);
     }
@@ -34,6 +33,13 @@ public class TestStudent {
         Date oralPresentationAvailability = new Date();
         student.setOralPresentationAvailability(oralPresentationAvailability);
         assertEquals(student.getOralPresentationAvailability(), oralPresentationAvailability);
+    }
+
+    @Test
+    public void testGetAndSetReminder() {
+        String reminder = "Please join the group";
+        student.setReminder(reminder);
+        assertEquals(student.getReminder(), reminder);
     }
 
 }

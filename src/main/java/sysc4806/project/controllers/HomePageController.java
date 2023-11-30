@@ -13,7 +13,7 @@ import sysc4806.project.util.AuthenticationHelper;
 
 @Controller
 public class HomePageController {
-    private final Logger log= LoggerFactory.getLogger(HomePageController.class);
+    private final Logger log = LoggerFactory.getLogger(HomePageController.class);
 
     @Autowired
     private ApplicationUserService userService;

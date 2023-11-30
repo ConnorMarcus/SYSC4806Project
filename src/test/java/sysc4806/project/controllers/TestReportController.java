@@ -28,11 +28,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TestReportController {
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     @InjectMocks
     private ReportController controller;
+
     @MockBean
     private ApplicationUserService userService;
+
     @MockBean
     private ReportService reportService;
 

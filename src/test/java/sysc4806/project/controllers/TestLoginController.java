@@ -26,11 +26,14 @@ import static sysc4806.project.util.AuthenticationHelper.STUDENT_ROLE;
 public class TestLoginController {
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     @InjectMocks
     private LoginController controller;
+
     @MockBean
     private ApplicationUserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 

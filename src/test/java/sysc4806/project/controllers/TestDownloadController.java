@@ -24,9 +24,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TestDownloadController {
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     @InjectMocks
     private DownloadController controller;
+
     @MockBean
     private ApplicationUserService userService;
 

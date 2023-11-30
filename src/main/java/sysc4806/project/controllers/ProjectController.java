@@ -91,7 +91,7 @@ public class ProjectController {
         if (project != null && student != null) {
             project.addStudent(student);
             student.setProject(project);
-            if (!student.getReminder().isEmpty()) { student.setReminder(null); }
+            if (student.getReminder() != null) { student.setReminder(null); }
             log.info(String.format("student with id: %s has been added to project with id: %s", userId, projectId));
             projectRepository.save(project);
             return "viewProjects";
