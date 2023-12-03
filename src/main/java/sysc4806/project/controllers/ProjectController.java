@@ -109,6 +109,7 @@ public class ProjectController {
         if (project != null && student != null) {
             project.removeStudent(student);
             student.setProject(null);
+            student.getOralPresentationAvailability().clear();
             projectRepository.save(project);
             log.info(String.format("student with id: %s has been removed from project with id: %s", userId, projectId));
             return "viewProjects";
@@ -124,6 +125,7 @@ public class ProjectController {
     private void disassociateProject(Project project) {
         for (Student s: project.getStudents()) {
             s.setProject(null);
+            s.getOralPresentationAvailability().clear();
             applicationUserRepository.save(s);
         }
         Professor professor = project.getProfessor();

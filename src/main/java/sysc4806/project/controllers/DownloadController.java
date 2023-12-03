@@ -27,7 +27,7 @@ public class DownloadController {
     @Autowired
     private ApplicationUserService userService;
 
-    @RequestMapping(path="/downloadReport/{projectId}")
+    @RequestMapping(path ="/downloadReport/{projectId}", method = RequestMethod.GET)
     @Secured(PROFESSOR_ROLE)
     public ResponseEntity<Resource> professorDownloadReport(@PathVariable Long projectId) throws IOException {
         Professor user = (Professor) userService.getCurrentUser();

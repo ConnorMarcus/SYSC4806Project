@@ -12,8 +12,6 @@ import java.util.List;
 @Entity
 public class Professor extends ApplicationUser {
 
-    private Date oralPresentationAvailability;
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "professor")
     private List<Project> projects;
 
@@ -24,22 +22,6 @@ public class Professor extends ApplicationUser {
     public Professor(String name, String email, String password) {
         super(name, email, password);
         this.projects = new ArrayList<>();
-    }
-
-    /**
-     * Get professor's oral presentation availability
-     * @return Date
-     */
-    public Date getOralPresentationAvailability() {
-        return oralPresentationAvailability;
-    }
-
-    /**
-     * Set professor's oral presentation availability
-     * @param oralPresentationAvailability Date
-     */
-    public void setOralPresentationAvailability(Date oralPresentationAvailability) {
-        this.oralPresentationAvailability = oralPresentationAvailability;
     }
 
     /**
