@@ -42,8 +42,8 @@ The 4th Year Project Management System is available at [sysc4806project.azureweb
 ## Sprints
 Our project is divided into three 2-week sprints: 
 - Early Prototype (Released Nov 13, 2023)
-- Alpha Release (**available now**)
-- Final Product (December 8, 2023)
+- Alpha Release (Released Nov 27, 2023)
+- Final Product (Released Dec 8, 2023)
 
 ### Agile Practices
 Tickets for new features, bug fixes, and more are available in the [Issues tab](https://github.com/ConnorMarcus/SYSC4806Project/issues). Our weekly scrums are also available in the [Issues tab](https://github.com/ConnorMarcus/SYSC4806Project/issues). The Kanban board is available in the [Project tab](https://github.com/users/ConnorMarcus/projects/1). 
