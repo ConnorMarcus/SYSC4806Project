@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class TestProfessor {
@@ -17,10 +20,16 @@ public class TestProfessor {
     }
 
     @Test
-    public void testSetAndGetOralPresentationAvailability() {
-        Date oralPresentationDate = new Date();
-        professor.setOralPresentationAvailability(oralPresentationDate);
-        assertEquals(professor.getOralPresentationAvailability(), oralPresentationDate);
+    public void testGetProjects() {
+        assertEquals(new ArrayList<>(), professor.getProjects());
+    }
+
+    @Test
+    public void testRemoveProject() {
+        Project p = new Project();
+        professor.getProjects().add(p);
+        professor.removeProject(p);
+        assertEquals(new ArrayList<>(), professor.getProjects());
     }
 
 }

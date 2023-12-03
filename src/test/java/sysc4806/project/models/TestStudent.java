@@ -4,7 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 public class TestStudent {
 
@@ -30,9 +32,9 @@ public class TestStudent {
 
     @Test
     public void testGetAndSetOralPresentationAvailability() {
-        Date oralPresentationAvailability = new Date();
-        student.setOralPresentationAvailability(oralPresentationAvailability);
-        assertEquals(student.getOralPresentationAvailability(), oralPresentationAvailability);
+        PresentationAvailability oralPresentationAvailability = new PresentationAvailability(LocalDateTime.of(2023, 12, 12, 10, 0));
+        student.addOralPresentationAvailability(oralPresentationAvailability);
+        assertEquals(student.getOralPresentationAvailability(), List.of(oralPresentationAvailability));
     }
 
     @Test

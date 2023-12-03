@@ -56,7 +56,6 @@ public class TestDownloadController {
 
         this.mockMvc.perform(get("/downloadReport/200")).andExpect(status().isBadRequest());
 
-        // Test download when student is in a project
         Project project = new Project();
         ReportFile report = new ReportFile("filename", "content".getBytes());
         project.setReport(report);

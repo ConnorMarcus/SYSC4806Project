@@ -2,6 +2,7 @@ package sysc4806.project.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -20,6 +21,8 @@ public class Project {
     private int maxStudents;
 
     private List<Program> restrictions;
+
+    private LocalDateTime oralPresentationDateTime;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "project")
     private List<Student> students;
@@ -137,6 +140,22 @@ public class Project {
      */
     public void setRestrictions(List<Program> restrictions) {
         this.restrictions = restrictions;
+    }
+
+    /**
+     * Get date/time of the project
+     * @return LocalDateTime object
+     */
+    public LocalDateTime getOralPresentationDateTime() {
+        return oralPresentationDateTime;
+    }
+
+    /**
+     * Set date/time of the project
+     * @param dateTime LocalDateTime object representing the date/time
+     */
+    public void setOralPresentationDateTime(LocalDateTime dateTime) {
+        this.oralPresentationDateTime = dateTime;
     }
 
     /**
