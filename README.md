@@ -75,5 +75,5 @@ The UML class diagram for all the Models can be found in the [diagrams](/diagram
 Connor Marcus, Noah Hammoud, George Pantazopoulos, and Vahid Foroughi
 
 <a href="https://github.com/ConnorMarcus/SYSC4806Project/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=va9id/monopoly" />
+  <img src="https://contrib.rocks/image?repo=ConnorMarcus/SYSC4806Project" />
 </a> 
